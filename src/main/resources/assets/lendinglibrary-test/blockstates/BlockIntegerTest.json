@@ -1,0 +1,31 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": { },
+    "model": "cube_all"
+  },
+  "variants": {
+    "meta": {
+      "0": {
+        "textures": {
+          "all": "minecraft:blocks/coal_block"
+        }
+      },
+      "1": {
+        "textures": {
+          "all": "minecraft:blocks/iron_block"
+        }
+      },
+      "2": {
+        "textures": {
+          "all": "minecraft:blocks/gold_block"
+        }
+      },
+      "3": {
+        "textures": {
+          "all": "minecraft:blocks/diamond_block"
+        }
+      }
+    }
+  }
+}
