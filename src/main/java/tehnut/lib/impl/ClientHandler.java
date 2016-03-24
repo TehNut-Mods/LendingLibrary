@@ -18,7 +18,7 @@ import tehnut.lib.iface.IMeshProvider;
 import tehnut.lib.iface.IVariantProvider;
 
 @Used
-public class ClientProxy extends CommonProxy {
+public class ClientHandler extends CommonHandler {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {

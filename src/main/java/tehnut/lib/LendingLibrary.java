@@ -1,12 +1,12 @@
 package tehnut.lib;
 
-import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import tehnut.lib.annot.Handler;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.ModItem;
-import tehnut.lib.impl.CommonProxy;
+import tehnut.lib.impl.ClientHandler;
+import tehnut.lib.impl.CommonHandler;
 import tehnut.lib.util.helper.LogHelper;
 
 import java.util.Set;
@@ -17,13 +17,12 @@ public class LendingLibrary {
     private Set<ASMDataTable.ASMData> modBlocks;
     private Set<ASMDataTable.ASMData> modItems;
     private Set<ASMDataTable.ASMData> modHandlers;
+    private CommonHandler commonHandler;
+    private ClientHandler clientHandler;
 
     private static LendingLibrary instance;
     private static String MODID;
     private static final LogHelper logger = new LogHelper("LendingLibrary");
-
-    @SidedProxy(clientSide = "tehnut.lib.impl.ClientProxy", serverSide = "tehnut.lib.impl.CommonProxy")
-    public static CommonProxy proxy;
 
     public LendingLibrary(String modid) {
         instance = this;
@@ -35,7 +34,10 @@ public class LendingLibrary {
         modItems = event.getAsmData().getAll(ModItem.class.getCanonicalName());
         modHandlers = event.getAsmData().getAll(Handler.class.getCanonicalName());
 
-        proxy.preInit(event);
+        commonHandler = new CommonHandler();
+        clientHandler = new ClientHandler();
+
+        commonHandler.preInit(event);
     }
 
     public Set<ASMDataTable.ASMData> getModBlocks() {
@@ -48,6 +50,14 @@ public class LendingLibrary {
 
     public Set<ASMDataTable.ASMData> getModHandlers() {
         return modHandlers;
+    }
+
+    public CommonHandler getCommonHandler() {
+        return commonHandler;
+    }
+
+    public ClientHandler getClientHandler() {
+        return clientHandler;
     }
 
     public static LendingLibrary getInstance() {

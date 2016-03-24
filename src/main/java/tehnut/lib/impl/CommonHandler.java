@@ -11,7 +11,7 @@ import tehnut.lib.LendingLibrary;
 import tehnut.lib.annot.Handler;
 import tehnut.lib.iface.IProxy;
 
-public class CommonProxy implements IProxy {
+public class CommonHandler implements IProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
@@ -29,8 +29,8 @@ public class CommonProxy implements IProxy {
             }
         }
 
-        ObjectHandler.registerBlocks();
-        ObjectHandler.registerItems();
+        ObjectHandler.registerBlocks(event.getSide());
+        ObjectHandler.registerItems(event.getSide());
     }
 
     @Override
