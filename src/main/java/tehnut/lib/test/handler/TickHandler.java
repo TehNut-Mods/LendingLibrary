@@ -9,10 +9,12 @@ import tehnut.lib.annot.Used;
 @Used
 public class TickHandler {
 
+    private final boolean ENABLED = false;
+
     @SubscribeEvent
     @Used
     public void onTick(TickEvent.WorldTickEvent event) {
-        if (event.world.getTotalWorldTime() % 200 == 0)
+        if (ENABLED && event.world.getTotalWorldTime() % 200 == 0)
             System.out.println("boop");
     }
 }

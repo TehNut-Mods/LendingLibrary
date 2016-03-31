@@ -2,6 +2,7 @@ package tehnut.lib;
 
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import tehnut.lib.annot.Handler;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.ModItem;
@@ -38,6 +39,8 @@ public class LendingLibrary {
         clientHandler = new ClientHandler();
 
         commonHandler.preInit(event);
+        if (event.getSide() == Side.CLIENT)
+            clientHandler.preInit(event);
     }
 
     public Set<ASMDataTable.ASMData> getModBlocks() {

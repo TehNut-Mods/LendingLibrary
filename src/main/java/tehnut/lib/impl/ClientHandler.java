@@ -22,8 +22,6 @@ public class ClientHandler extends CommonHandler {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-        super.preInit(event);
-
         for (ASMDataTable.ASMData data : LendingLibrary.getInstance().getModHandlers()) {
             try {
                 Class<?> asmClass = Class.forName(data.getClassName());
