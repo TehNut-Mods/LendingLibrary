@@ -13,9 +13,11 @@ import tehnut.lib.annot.ModItem;
 import tehnut.lib.util.helper.BlockHelper;
 import tehnut.lib.util.helper.ItemHelper;
 
+import java.lang.reflect.Constructor;
+
 public class ObjectHandler {
 
-    protected static void registerBlocks(Side side) {
+    static void registerBlocks(Side side) {
         for (ASMDataTable.ASMData data : LendingLibrary.getInstance().getModBlocks()) {
             try {
                 Class<?> asmClass = Class.forName(data.getClassName());
@@ -24,10 +26,15 @@ public class ObjectHandler {
                 String name = modBlockClass.getAnnotation(ModBlock.class).name();
                 Class<? extends TileEntity> tileClass = modBlockClass.getAnnotation(ModBlock.class).tileEntity();
                 Class<? extends ItemBlock> itemBlockClass = modBlockClass.getAnnotation(ModBlock.class).itemBlock();
+                Constructor<? extends ItemBlock> itemBlockConstructor = itemBlockClass.getDeclaredConstructor(Block.class);
 
                 Block modBlock = modBlockClass.newInstance();
+                modBlock.setRegistryName(name);
+                Item modItemBlock = itemBlockConstructor.newInstance(modBlock);
+                modItemBlock.setRegistryName(modBlock.getRegistryName());
 
-                GameRegistry.registerBlock(modBlock, itemBlockClass, name);
+                GameRegistry.register(modBlock);
+                GameRegistry.register(modItemBlock);
                 if (tileClass != TileEntity.class)
                     GameRegistry.registerTileEntity(tileClass, LendingLibrary.getMODID() + ":" + tileClass.getSimpleName());
                 if (side == Side.CLIENT)
@@ -40,7 +47,7 @@ public class ObjectHandler {
         }
     }
 
-    protected static void registerItems(Side side) {
+    static void registerItems(Side side) {
         for (ASMDataTable.ASMData data : LendingLibrary.getInstance().getModItems()) {
             try {
                 Class<?> asmClass = Class.forName(data.getClassName());
@@ -48,8 +55,9 @@ public class ObjectHandler {
                 String name = modItemClass.getAnnotation(ModItem.class).name();
 
                 Item modItem = modItemClass.newInstance();
+                modItem.setRegistryName(name);
 
-                GameRegistry.registerItem(modItem, name);
+                GameRegistry.register(modItem);
                 if (side == Side.CLIENT)
                     LendingLibrary.getInstance().getClientHandler().tryHandleItemModel(modItem, name);
                 ItemHelper.itemClassToName.put(modItemClass, name);

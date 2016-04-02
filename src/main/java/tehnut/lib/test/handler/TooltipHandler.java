@@ -13,6 +13,6 @@ public class TooltipHandler {
     @SubscribeEvent
     @Used
     public void onTooltip(ItemTooltipEvent event) {
-        event.toolTip.add(LendingLibraryTest.MODID);
+        event.getToolTip().add(LendingLibraryTest.MODID);
     }
 }
