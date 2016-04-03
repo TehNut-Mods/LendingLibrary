@@ -51,6 +51,10 @@ public class BlockString extends Block {
         setupStates();
     }
 
+    public BlockString(Material material, String propName, String... values) {
+        this(material, values, propName);
+    }
+
     public BlockString(Material material, String[] values) {
         this(material, values, "type");
     }
