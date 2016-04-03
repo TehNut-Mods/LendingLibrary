@@ -1,6 +1,5 @@
 package tehnut.lib.impl;
 
-import com.google.common.base.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

@@ -1,6 +1,5 @@
 package tehnut.lib.block.base;
 
-import tehnut.lib.block.property.UnlistedPropertyInteger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -20,23 +19,23 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tehnut.lib.block.property.UnlistedPropertyInteger;
 
 import java.util.List;
 
 /**
  * Creates a tehnut.lib.test.block that has multiple meta-based states.
- * 
+ * <p>
  * These states will be numbered 0 through {@code maxMeta}.
  */
-public class BlockInteger extends Block
-{
+public class BlockInteger extends Block {
+
     private final int maxMeta;
     private final PropertyInteger metaProp;
     private final IUnlistedProperty unlistedMetaProp;
     private final BlockStateContainer realBlockState;
 
-    public BlockInteger(Material material, int maxMeta, String propName)
-    {
+    public BlockInteger(Material material, int maxMeta, String propName) {
         super(material);
 
         this.maxMeta = maxMeta;
@@ -47,73 +46,61 @@ public class BlockInteger extends Block
         setupStates();
     }
 
-    public BlockInteger(Material material, int maxMeta)
-    {
+    public BlockInteger(Material material, int maxMeta) {
         this(material, maxMeta, "meta");
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(metaProp, meta);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return (Integer) state.getValue(metaProp);
     }
 
     @Override
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
     }
 
     @Override
-    public BlockStateContainer getBlockState()
-    {
+    public BlockStateContainer getBlockState() {
         return this.realBlockState;
     }
 
     @Override
-    public BlockStateContainer createBlockState()
-    {
+    public BlockStateContainer createBlockState() {
         return Blocks.air.getBlockState();
     }
 
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(this, 1, this.getMetaFromState(world.getBlockState(pos)));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List<ItemStack> list)
-    {
+    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List<ItemStack> list) {
         for (int i = 0; i < maxMeta + 1; i++)
             list.add(new ItemStack(this, 1, i));
     }
 
-    private void setupStates()
-    {
+    private void setupStates() {
         this.setDefaultState(getExtendedBlockState().withProperty(unlistedMetaProp, 0).withProperty(metaProp, 0));
     }
 
-    public ExtendedBlockState getBaseExtendedState()
-    {
+    public ExtendedBlockState getBaseExtendedState() {
         return (ExtendedBlockState) this.getBlockState();
     }
 
-    public IExtendedBlockState getExtendedBlockState()
-    {
+    public IExtendedBlockState getExtendedBlockState() {
         return (IExtendedBlockState) this.getBaseExtendedState().getBaseState();
     }
 
-    private BlockStateContainer createRealBlockState()
-    {
-        return new ExtendedBlockState(this, new IProperty[] { metaProp }, new IUnlistedProperty[] { unlistedMetaProp });
+    private BlockStateContainer createRealBlockState() {
+        return new ExtendedBlockState(this, new IProperty[]{metaProp}, new IUnlistedProperty[]{unlistedMetaProp});
     }
 
     public int getMaxMeta() {

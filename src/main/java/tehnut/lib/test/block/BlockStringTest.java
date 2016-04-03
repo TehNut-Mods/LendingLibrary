@@ -16,7 +16,7 @@ import java.util.List;
 @Used
 public class BlockStringTest extends BlockString implements IVariantProvider {
 
-    public static final String[] NAMES = new String[] { "test1", "test2" };
+    public static final String[] NAMES = new String[]{"test1", "test2"};
 
     public BlockStringTest() {
         super(Material.clay, NAMES);

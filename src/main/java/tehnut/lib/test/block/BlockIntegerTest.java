@@ -1,7 +1,6 @@
 package tehnut.lib.test.block;
 
 import net.minecraft.block.material.Material;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.Used;

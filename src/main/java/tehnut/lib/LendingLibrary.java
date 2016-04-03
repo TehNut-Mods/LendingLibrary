@@ -12,18 +12,20 @@ import tehnut.lib.util.helper.LogHelper;
 
 import java.util.Set;
 
-/** Create a new instance of this in your mod **/
+/**
+ * Create a new instance of this in your mod
+ **/
 public class LendingLibrary {
+
+    private static final LogHelper logger = new LogHelper("LendingLibrary");
+    private static LendingLibrary instance;
+    private static String MODID;
 
     private Set<ASMDataTable.ASMData> modBlocks;
     private Set<ASMDataTable.ASMData> modItems;
     private Set<ASMDataTable.ASMData> modHandlers;
     private CommonHandler commonHandler;
     private ClientHandler clientHandler;
-
-    private static LendingLibrary instance;
-    private static String MODID;
-    private static final LogHelper logger = new LogHelper("LendingLibrary");
 
     public LendingLibrary(String modid) {
         instance = this;
