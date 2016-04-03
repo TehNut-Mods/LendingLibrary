@@ -1,5 +1,6 @@
 package tehnut.lib.impl;
 
+import com.google.common.base.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -29,9 +30,12 @@ public class ObjectHandler {
                 Constructor<? extends ItemBlock> itemBlockConstructor = itemBlockClass.getDeclaredConstructor(Block.class);
 
                 Block modBlock = modBlockClass.newInstance();
-                modBlock.setRegistryName(name);
+                if (modBlock.getRegistryName() == null)
+                    modBlock.setRegistryName(name);
+
                 Item modItemBlock = itemBlockConstructor.newInstance(modBlock);
-                modItemBlock.setRegistryName(modBlock.getRegistryName());
+                if (modItemBlock.getRegistryName() == null)
+                    modItemBlock.setRegistryName(modBlock.getRegistryName());
 
                 GameRegistry.register(modBlock);
                 GameRegistry.register(modItemBlock);
@@ -55,7 +59,8 @@ public class ObjectHandler {
                 String name = modItemClass.getAnnotation(ModItem.class).name();
 
                 Item modItem = modItemClass.newInstance();
-                modItem.setRegistryName(name);
+                if (modItem.getRegistryName() == null)
+                    modItem.setRegistryName(name);
 
                 GameRegistry.register(modItem);
                 if (side == Side.CLIENT)
