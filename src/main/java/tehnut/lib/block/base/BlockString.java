@@ -24,6 +24,7 @@ import tehnut.lib.block.property.UnlistedPropertyString;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Creates a block that has multiple meta-based states.
@@ -43,6 +44,10 @@ public class BlockString extends Block {
         super(material);
 
         this.maxMeta = values.length - 1;
+
+        for (int i = 0; i < values.length; i++)
+            values[i] = values[i].toLowerCase(Locale.ENGLISH);
+
         this.values = Arrays.asList(values);
 
         this.stringProp = PropertyString.create(propName, values);
