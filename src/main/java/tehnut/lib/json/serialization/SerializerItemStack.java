@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import tehnut.lib.LendingLibrary;
 import tehnut.lib.json.JsonHelper;
 
 import java.lang.reflect.Type;
@@ -28,7 +29,7 @@ public class SerializerItemStack implements JsonSerializer<ItemStack>, JsonDeser
         try {
             tagCompound = JsonToNBT.getTagFromJson(JsonHelper.getString(json, NBT, ""));
         } catch (NBTException e) {
-            // Pokeball!
+            LendingLibrary.getLogger().error("Error handling NBT string for {}. Is it formatted correctly?", name);
         }
 
         ItemStack ret = new ItemStack(Item.itemRegistry.getObject(name), amount, meta);

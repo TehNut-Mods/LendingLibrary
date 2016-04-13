@@ -57,7 +57,7 @@ public class BlockInteger extends Block {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return (Integer) state.getValue(metaProp);
+        return state.getValue(metaProp);
     }
 
     @Override
