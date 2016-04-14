@@ -27,7 +27,12 @@ public class SerializerItemStack implements JsonSerializer<ItemStack>, JsonDeser
         int meta = JsonHelper.getInteger(json, META, 0);
         NBTTagCompound tagCompound = null;
         try {
-            tagCompound = JsonToNBT.getTagFromJson(JsonHelper.getString(json, NBT, ""));
+            String nbtJson = JsonHelper.getString(json, NBT, "");
+            if (!nbtJson.startsWith("{"))
+                nbtJson = "{" + nbtJson;
+            if (!nbtJson.endsWith("}"))
+                nbtJson = nbtJson + "}";
+            tagCompound = JsonToNBT.getTagFromJson(nbtJson);
         } catch (NBTException e) {
             LendingLibrary.getLogger().error("Error handling NBT string for {}. Is it formatted correctly?", name);
         }
@@ -46,6 +51,6 @@ public class SerializerItemStack implements JsonSerializer<ItemStack>, JsonDeser
         jsonObject.addProperty(META, src.getItemDamage());
         if (src.getTagCompound() != null)
             jsonObject.addProperty(NBT, src.getTagCompound().toString());
-        return null;
+        return jsonObject;
     }
 }

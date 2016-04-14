@@ -38,6 +38,7 @@ public class LendingLibraryTest {
         getLibrary().registerObjects(event);
 
         JsonConfigHandler.init(new File(event.getModConfigurationDirectory(), "TestConfig.json"));
+        JsonConfigHandler.init2(new File(event.getModConfigurationDirectory(), "TestItemStack.json"));
     }
 
     public LendingLibrary getLibrary() {
