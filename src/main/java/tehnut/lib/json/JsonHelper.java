@@ -16,14 +16,22 @@ import java.lang.reflect.Type;
 
 public class JsonHelper {
 
-    public static final Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
-            .serializeNulls()
-            .disableHtmlEscaping()
-            .registerTypeAdapter(BlockPos.class, new SerializerBlockPos())
-            .registerTypeAdapter(ItemStack.class, new SerializerItemStack(false))
-            .registerTypeAdapter(BlockStack.class, new SerializerBlockStack())
-            .create();
+    public static Gson gson;
+
+    static {
+        setGson(false, false);
+    }
+
+    public static void setGson(boolean offset, boolean nbt) {
+        gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .serializeNulls()
+                .disableHtmlEscaping()
+                .registerTypeAdapter(BlockPos.class, new SerializerBlockPos(offset))
+                .registerTypeAdapter(ItemStack.class, new SerializerItemStack(nbt))
+                .registerTypeAdapter(BlockStack.class, new SerializerBlockStack())
+                .create();
+    }
 
     // Helpers
 
