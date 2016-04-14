@@ -12,6 +12,7 @@ import tehnut.lib.util.BlockStack;
 
 import javax.annotation.Nullable;
 import java.io.*;
+import java.lang.reflect.Type;
 
 public class JsonHelper {
 
@@ -64,6 +65,25 @@ public class JsonHelper {
     public static <T> T fromJson(File jsonFile, Class<T> clazz) {
         try {
             return gson.fromJson(new FileReader(jsonFile), clazz);
+        } catch (FileNotFoundException e) {
+            LendingLibrary.getLogger().error(e.getLocalizedMessage());
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempts to create an object from a provided Json file.
+     *
+     * @param jsonFile - The file to read from.
+     * @param type     - The type to deserialize.
+     * @param <T>      - The type to deserialize.
+     * @return The created object
+     */
+    @Nullable
+    public static <T> T fromJson(File jsonFile, Type type) {
+        try {
+            return gson.fromJson(new FileReader(jsonFile), type);
         } catch (FileNotFoundException e) {
             LendingLibrary.getLogger().error(e.getLocalizedMessage());
         }
