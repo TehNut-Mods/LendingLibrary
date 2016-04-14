@@ -20,7 +20,7 @@ public class JsonHelper {
             .serializeNulls()
             .disableHtmlEscaping()
             .registerTypeAdapter(BlockPos.class, new SerializerBlockPos())
-            .registerTypeAdapter(ItemStack.class, new SerializerItemStack())
+            .registerTypeAdapter(ItemStack.class, new SerializerItemStack(false))
             .registerTypeAdapter(BlockStack.class, new SerializerBlockStack())
             .create();
 

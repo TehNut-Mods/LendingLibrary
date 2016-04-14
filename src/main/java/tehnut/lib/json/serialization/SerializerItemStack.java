@@ -20,6 +20,16 @@ public class SerializerItemStack implements JsonSerializer<ItemStack>, JsonDeser
     public static final String META = "meta";
     public static final String NBT = "nbt";
 
+    private final boolean nbt;
+
+    public SerializerItemStack(boolean nbt) {
+        this.nbt = nbt;
+    }
+
+    public SerializerItemStack() {
+        this(true);
+    }
+
     @Override
     public ItemStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         ResourceLocation name = new ResourceLocation(JsonHelper.getString(json, NAME, "minecraft:air"));
@@ -27,18 +37,20 @@ public class SerializerItemStack implements JsonSerializer<ItemStack>, JsonDeser
         int meta = JsonHelper.getInteger(json, META, 0);
         NBTTagCompound tagCompound = null;
         try {
-            String nbtJson = JsonHelper.getString(json, NBT, "");
-            if (!nbtJson.startsWith("{"))
-                nbtJson = "{" + nbtJson;
-            if (!nbtJson.endsWith("}"))
-                nbtJson = nbtJson + "}";
-            tagCompound = JsonToNBT.getTagFromJson(nbtJson);
+            if (nbt) {
+                String nbtJson = JsonHelper.getString(json, NBT, "");
+                if (!nbtJson.startsWith("{"))
+                    nbtJson = "{" + nbtJson;
+                if (!nbtJson.endsWith("}"))
+                    nbtJson = nbtJson + "}";
+                tagCompound = JsonToNBT.getTagFromJson(nbtJson);
+            }
         } catch (NBTException e) {
             LendingLibrary.getLogger().error("Error handling NBT string for {}. Is it formatted correctly?", name);
         }
 
         ItemStack ret = new ItemStack(Item.itemRegistry.getObject(name), amount, meta);
-        if (tagCompound != null)
+        if (nbt && tagCompound != null)
             ret.setTagCompound(tagCompound);
         return ret;
     }
@@ -49,7 +61,7 @@ public class SerializerItemStack implements JsonSerializer<ItemStack>, JsonDeser
         jsonObject.addProperty(NAME, src.getItem().getRegistryName().toString());
         jsonObject.addProperty(AMOUNT, src.stackSize);
         jsonObject.addProperty(META, src.getItemDamage());
-        if (src.getTagCompound() != null)
+        if (nbt && src.getTagCompound() != null)
             jsonObject.addProperty(NBT, src.getTagCompound().toString());
         return jsonObject;
     }
