@@ -22,7 +22,7 @@ public class JsonConfigHandler {
         def.getTagCompound().setBoolean("newBool", true);
         JsonHelper.<ItemStack>tryCreateDefault(jsonConfig, def);
         ItemStack stack = JsonHelper.fromJson(jsonConfig, ItemStack.class);
-        LendingLibraryTest.instance.getLogger().info(stack == null ? "null" : stack.toString() + "{" + stack.getTagCompound().toString() + "}");
+        LendingLibraryTest.instance.getLogger().info(stack == null ? "null" : stack.toString());
     }
 
     public static class TestConfig {

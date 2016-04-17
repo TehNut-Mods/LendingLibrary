@@ -11,6 +11,7 @@ import tehnut.lib.json.serialization.*;
 import tehnut.lib.util.BlockStack;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Type;
 
@@ -31,6 +32,10 @@ public class JsonHelper {
                 .registerTypeAdapter(ItemStack.class, new SerializerItemStack(nbt))
                 .registerTypeAdapter(BlockStack.class, new SerializerBlockStack())
                 .create();
+    }
+
+    public static void setGson(Gson newGson) {
+        gson = newGson;
     }
 
     // Helpers
@@ -104,7 +109,7 @@ public class JsonHelper {
     public static boolean getBoolean(JsonElement jsonElement, String memberName, boolean def) {
         if (!jsonElement.getAsJsonObject().has(memberName))
             return def;
-        
+
         return jsonElement.getAsJsonObject().get(memberName).getAsBoolean();
     }
 
@@ -149,11 +154,30 @@ public class JsonHelper {
 
         return jsonElement.getAsJsonObject().get(memberName).getAsDouble();
     }
-    
+
     public static float getFloat(JsonElement jsonElement, String memberName, float def) {
         if (!jsonElement.getAsJsonObject().has(memberName))
             return def;
 
         return jsonElement.getAsJsonObject().get(memberName).getAsFloat();
+    }
+
+    public static Color getColor(JsonElement jsonElement, String memberName, Color def) {
+        return getColor(jsonElement, memberName, "#" + def.getRGB());
+    }
+
+    public static Color getColor(JsonElement jsonElement, String memberName, String def) {
+        if (!def.startsWith("#"))
+            def = "#" + def;
+
+        if (!jsonElement.getAsJsonObject().has(memberName))
+            return Color.decode(def);
+
+        String ret = jsonElement.getAsJsonObject().get(memberName).getAsString();
+
+        if (!ret.startsWith("#"))
+            ret = "#" + ret;
+
+        return Color.decode(ret);
     }
 }
