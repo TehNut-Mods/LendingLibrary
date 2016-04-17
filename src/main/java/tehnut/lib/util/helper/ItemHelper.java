@@ -1,7 +1,8 @@
 package tehnut.lib.util.helper;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tehnut.lib.LendingLibrary;
 
 import javax.annotation.Nullable;
@@ -14,7 +15,7 @@ public class ItemHelper {
 
     @Nullable
     public static Item getItem(String name) {
-        return GameRegistry.findItem(LendingLibrary.getMODID(), name);
+        return ForgeRegistries.ITEMS.getValue(new ResourceLocation(LendingLibrary.getMODID(), name));
     }
 
     @Nullable

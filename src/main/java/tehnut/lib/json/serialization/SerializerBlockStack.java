@@ -8,7 +8,7 @@ import tehnut.lib.util.BlockStack;
 
 import java.lang.reflect.Type;
 
-public class SerializerBlockStack implements JsonSerializer<BlockStack>, JsonDeserializer<BlockStack> {
+public class SerializerBlockStack extends SerializerBase<BlockStack> {
 
     public static final String NAME = "name";
     public static final String META = "meta";

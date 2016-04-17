@@ -13,7 +13,7 @@ import tehnut.lib.json.JsonHelper;
 
 import java.lang.reflect.Type;
 
-public class SerializerItemStack implements JsonSerializer<ItemStack>, JsonDeserializer<ItemStack> {
+public class SerializerItemStack extends SerializerBase<ItemStack> {
 
     public static final String NAME = "name";
     public static final String AMOUNT = "amount";

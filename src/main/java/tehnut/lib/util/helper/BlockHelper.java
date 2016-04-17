@@ -1,7 +1,8 @@
 package tehnut.lib.util.helper;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tehnut.lib.LendingLibrary;
 
 import javax.annotation.Nullable;
@@ -14,7 +15,7 @@ public class BlockHelper {
 
     @Nullable
     public static Block getBlock(String name) {
-        return GameRegistry.findBlock(LendingLibrary.getMODID(), name);
+        return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(LendingLibrary.getMODID(), name));
     }
 
     @Nullable

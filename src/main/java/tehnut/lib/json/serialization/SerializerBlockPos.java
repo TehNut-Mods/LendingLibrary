@@ -6,7 +6,7 @@ import tehnut.lib.json.JsonHelper;
 
 import java.lang.reflect.Type;
 
-public class SerializerBlockPos implements JsonSerializer<BlockPos>, JsonDeserializer<BlockPos> {
+public class SerializerBlockPos extends SerializerBase<BlockPos> {
 
     public static final String X_COORD = "xCoord";
     public static final String Y_COORD = "yCoord";
