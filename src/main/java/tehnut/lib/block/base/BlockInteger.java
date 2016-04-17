@@ -24,7 +24,7 @@ import tehnut.lib.block.property.UnlistedPropertyInteger;
 import java.util.List;
 
 /**
- * Creates a tehnut.lib.test.block that has multiple meta-based states.
+ * Creates a block that has multiple meta-based states.
  * <p>
  * These states will be numbered 0 through {@code maxMeta}.
  */
@@ -43,6 +43,7 @@ public class BlockInteger extends Block {
         this.metaProp = PropertyInteger.create(propName, 0, maxMeta);
         this.unlistedMetaProp = new UnlistedPropertyInteger(maxMeta, propName);
         this.realBlockState = createRealBlockState();
+        setDefaultState(getBlockState().getBaseState().withProperty(metaProp, 0));
         setupStates();
     }
 
@@ -52,7 +53,7 @@ public class BlockInteger extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(metaProp, meta);
+        return getBlockState().getBaseState().withProperty(metaProp, meta);
     }
 
     @Override

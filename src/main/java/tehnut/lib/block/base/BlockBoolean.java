@@ -47,6 +47,7 @@ public class BlockBoolean extends Block {
         this.boolProp = PropertyBool.create(propName);
         this.unlistedBooleanProp = new UnlistedPropertyBoolean(propName);
         this.realBlockState = createRealBlockState();
+        setDefaultState(getBlockState().getBaseState().withProperty(boolProp, false));
         setupStates();
     }
 
@@ -56,7 +57,7 @@ public class BlockBoolean extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(boolProp, values.get(meta));
+        return getBlockState().getBaseState().withProperty(boolProp, values.get(meta));
     }
 
     @Override
@@ -68,6 +69,8 @@ public class BlockBoolean extends Block {
     public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
     }
+
+
 
     @Override
     public BlockStateContainer getBlockState() {

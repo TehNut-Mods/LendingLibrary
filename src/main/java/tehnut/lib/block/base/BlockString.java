@@ -53,6 +53,7 @@ public class BlockString extends Block {
         this.stringProp = PropertyString.create(propName, values);
         this.unlistedStringProp = new UnlistedPropertyString(values, propName);
         this.realBlockState = createRealBlockState();
+        setDefaultState(getBlockState().getBaseState().withProperty(stringProp, values[0]));
         setupStates();
     }
 
