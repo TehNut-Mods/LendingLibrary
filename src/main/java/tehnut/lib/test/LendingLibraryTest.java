@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import tehnut.lib.LendingLibrary;
 import tehnut.lib.util.helper.LogHelper;
+import tehnut.lib.util.helper.NumeralHelper;
 
 import java.io.File;
 
@@ -39,6 +40,11 @@ public class LendingLibraryTest {
 
         JsonConfigHandler.init(new File(event.getModConfigurationDirectory(), "TestConfig.json"));
         JsonConfigHandler.init2(new File(event.getModConfigurationDirectory(), "TestItemStack.json"));
+
+        logger.info("The roman numeral for 21 is " + NumeralHelper.toRoman(21));
+        logger.info("The roman numeral for 69 is " + NumeralHelper.toRoman(69));
+        logger.info("The roman numeral for 1337 is " + NumeralHelper.toRoman(1337));
+        logger.info("The roman numeral for 80085 is " + NumeralHelper.toRoman(80085));
     }
 
     public LendingLibrary getLibrary() {
