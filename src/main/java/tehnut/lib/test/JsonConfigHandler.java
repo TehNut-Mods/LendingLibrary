@@ -16,7 +16,7 @@ public class JsonConfigHandler {
     }
 
     public static void init2(File jsonConfig) {
-        ItemStack def = new ItemStack(Items.diamond_sword, 4, 1);
+        ItemStack def = new ItemStack(Items.DIAMOND_SWORD, 4, 1);
         def.setTagCompound(new NBTTagCompound());
         def.getTagCompound().setInteger("newInt", 1);
         def.getTagCompound().setBoolean("newBool", true);

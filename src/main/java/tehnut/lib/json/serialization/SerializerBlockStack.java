@@ -1,8 +1,8 @@
 package tehnut.lib.json.serialization;
 
 import com.google.gson.*;
-import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tehnut.lib.json.JsonHelper;
 import tehnut.lib.util.BlockStack;
 
@@ -18,7 +18,7 @@ public class SerializerBlockStack extends SerializerBase<BlockStack> {
         ResourceLocation name = new ResourceLocation(JsonHelper.getString(json, NAME, "minecraft:air"));
         int meta = JsonHelper.getInteger(json, META, 0);
 
-        return new BlockStack(Block.blockRegistry.getObject(name), meta);
+        return new BlockStack(ForgeRegistries.BLOCKS.getValue(name), meta);
     }
 
     @Override

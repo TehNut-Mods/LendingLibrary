@@ -17,7 +17,7 @@ import java.util.List;
 public class BlockBooleanBadTest extends BlockBoolean implements IVariantProvider {
 
     public BlockBooleanBadTest() {
-        super(Material.coral);
+        super(Material.CORAL);
 
         setCreativeTab(LendingLibraryTest.tabTest);
         setUnlocalizedName("test.bad.boolean");

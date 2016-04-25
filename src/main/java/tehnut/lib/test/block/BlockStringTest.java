@@ -19,7 +19,7 @@ public class BlockStringTest extends BlockString implements IVariantProvider {
     public static final String[] NAMES = new String[]{"test1", "test2"};
 
     public BlockStringTest() {
-        super(Material.clay, NAMES);
+        super(Material.CLAY, NAMES);
 
         setCreativeTab(LendingLibraryTest.tabTest);
         setUnlocalizedName("test.string");

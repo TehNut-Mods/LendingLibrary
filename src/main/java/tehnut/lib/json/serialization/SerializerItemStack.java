@@ -1,13 +1,13 @@
 package tehnut.lib.json.serialization;
 
 import com.google.gson.*;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tehnut.lib.LendingLibrary;
 import tehnut.lib.json.JsonHelper;
 
@@ -49,7 +49,7 @@ public class SerializerItemStack extends SerializerBase<ItemStack> {
             LendingLibrary.getLogger().error("Error handling NBT string for {}. Is it formatted correctly?", name);
         }
 
-        ItemStack ret = new ItemStack(Item.itemRegistry.getObject(name), amount, meta);
+        ItemStack ret = new ItemStack(ForgeRegistries.ITEMS.getValue(name), amount, meta);
         if (nbt && tagCompound != null)
             ret.setTagCompound(tagCompound);
         return ret;

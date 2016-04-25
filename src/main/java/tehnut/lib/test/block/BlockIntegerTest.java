@@ -17,7 +17,7 @@ import java.util.List;
 public class BlockIntegerTest extends BlockInteger implements IVariantProvider {
 
     public BlockIntegerTest() {
-        super(Material.carpet, 3);
+        super(Material.CARPET, 3);
 
         setCreativeTab(LendingLibraryTest.tabTest);
         setUnlocalizedName("test.integer");

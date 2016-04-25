@@ -87,7 +87,7 @@ public class BlockString extends Block {
 
     @Override
     public BlockStateContainer createBlockState() {
-        return Blocks.air.getBlockState();
+        return Blocks.AIR.getBlockState();
     }
 
     @Override

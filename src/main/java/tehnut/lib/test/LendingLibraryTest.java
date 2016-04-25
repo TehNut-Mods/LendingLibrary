@@ -22,7 +22,7 @@ public class LendingLibraryTest {
     public static final CreativeTabs tabTest = new CreativeTabs("test") {
         @Override
         public Item getTabIconItem() {
-            return Items.bed;
+            return Items.BED;
         }
     };
 

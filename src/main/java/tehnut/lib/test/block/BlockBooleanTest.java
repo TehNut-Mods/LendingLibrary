@@ -17,7 +17,7 @@ import java.util.List;
 public class BlockBooleanTest extends BlockBoolean implements IVariantProvider {
 
     public BlockBooleanTest() {
-        super(Material.coral);
+        super(Material.CORAL);
 
         setCreativeTab(LendingLibraryTest.tabTest);
         setUnlocalizedName("test.boolean");

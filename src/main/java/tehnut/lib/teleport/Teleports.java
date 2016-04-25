@@ -40,7 +40,7 @@ public class Teleports {
                         player.playerNetServerHandler.sendPacket(new SPacketUpdateHealth(player.getHealth(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()));
                         player.timeUntilPortal = 150;
 
-                        player.worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.entity_endermen_teleport, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
+                        player.worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
                     } else {
                         WorldServer world = (WorldServer) getEntity().worldObj;
 
@@ -48,7 +48,7 @@ public class Teleports {
                         getEntity().timeUntilPortal = 150;
                         world.resetUpdateEntityTick();
 
-                        getEntity().worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.entity_endermen_teleport, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
+                        getEntity().worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
                     }
                 }
             }
@@ -93,14 +93,14 @@ public class Teleports {
                             player.worldObj.updateEntityWithOptionalForce(player, false);
                             player.playerNetServerHandler.sendPacket(new SPacketUpdateHealth(player.getHealth(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()));
                         }
-                        getEntity().worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.entity_endermen_teleport, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
+                        getEntity().worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
 
                     } else if (!getEntity().worldObj.isRemote) {
                         NBTTagCompound tag = new NBTTagCompound();
 
                         getEntity().writeToNBTOptional(tag);
                         getEntity().setDead();
-                        oldWorld.playSound(getEntity().posX, getEntity().posY, getEntity().posZ, SoundEvents.entity_endermen_teleport, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
+                        oldWorld.playSound(getEntity().posX, getEntity().posY, getEntity().posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
 
                         Entity teleportedEntity = EntityList.createEntityFromNBT(tag, newWorldServer);
                         if (teleportedEntity != null) {
@@ -115,7 +115,7 @@ public class Teleports {
                         newWorldServer.resetUpdateEntityTick();
                     }
                     getEntity().timeUntilPortal = getEntity() instanceof EntityLiving ? 150 : 20;
-                    getEntity().worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.entity_endermen_teleport, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
+                    getEntity().worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
                 }
             }
         }
