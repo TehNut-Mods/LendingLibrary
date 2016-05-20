@@ -5,7 +5,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import tehnut.lib.LendingLibrary;
+import tehnut.lib.translate.LocalizationHelper;
 import tehnut.lib.util.helper.LogHelper;
 import tehnut.lib.util.helper.NumeralHelper;
 
@@ -27,6 +29,8 @@ public class LendingLibraryTest {
     };
 
     private final LendingLibrary library;
+    private final SimpleNetworkWrapper networkWrapper = new SimpleNetworkWrapper(MODID);
+    private final LocalizationHelper localizationHelper = new LocalizationHelper(networkWrapper, 0);
     private LogHelper logger;
 
     public LendingLibraryTest() {
@@ -53,5 +57,9 @@ public class LendingLibraryTest {
 
     public LogHelper getLogger() {
         return logger;
+    }
+
+    public LocalizationHelper getLocalizationHelper() {
+        return localizationHelper;
     }
 }

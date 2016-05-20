@@ -3,6 +3,7 @@ package tehnut.lib.test.item;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,6 +34,14 @@ public class ItemMeshProviderTest extends Item implements IMeshProvider {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+        if (world.isRemote)
+            return super.onItemRightClick(stack, world, player, hand);
+
+        if (player.isSneaking()) {
+            LendingLibraryTest.instance.getLocalizationHelper().sendLocalization((EntityPlayerMP) player, "test.key.ignore");
+            LendingLibraryTest.instance.getLocalizationHelper().sendLocalization((EntityPlayerMP) player, "test.key.ignore.2", String.valueOf(System.currentTimeMillis()));
+        }
+
         if (stack.getTagCompound() == null)
             stack.setTagCompound(new NBTTagCompound());
         stack.getTagCompound().setBoolean("true", !stack.getTagCompound().getBoolean("true"));
