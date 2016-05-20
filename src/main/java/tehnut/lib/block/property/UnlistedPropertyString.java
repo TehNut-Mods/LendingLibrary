@@ -6,8 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UnlistedPropertyString implements IUnlistedProperty<String> {
-    private List values;
-    private String propName;
+
+    private final List<String> values;
+    private final String propName;
 
     public UnlistedPropertyString(String[] values, String propName) {
         this.values = Arrays.asList(values);

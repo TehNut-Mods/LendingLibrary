@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class ItemHelper {
 
-    public static Map<Class<? extends Item>, String> itemClassToName = new HashMap<Class<? extends Item>, String>();
+    public static final Map<Class<? extends Item>, String> itemClassToName = new HashMap<Class<? extends Item>, String>();
 
     @Nullable
     public static Item getItem(String name) {

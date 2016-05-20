@@ -26,7 +26,7 @@ public class LendingLibraryTest {
         }
     };
 
-    private LendingLibrary library;
+    private final LendingLibrary library;
     private LogHelper logger;
 
     public LendingLibraryTest() {

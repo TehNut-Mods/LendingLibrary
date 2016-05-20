@@ -5,8 +5,8 @@ import net.minecraft.util.math.BlockPos;
 
 public abstract class Teleport implements ITeleport {
 
-    private BlockPos pos;
-    private Entity entity;
+    private final BlockPos pos;
+    private final Entity entity;
 
     public Teleport(BlockPos pos, Entity entity) {
         this.pos = pos;

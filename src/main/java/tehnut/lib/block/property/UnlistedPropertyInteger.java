@@ -3,8 +3,9 @@ package tehnut.lib.block.property;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
 public class UnlistedPropertyInteger implements IUnlistedProperty<Integer> {
-    private int maxMeta;
-    private String propName;
+
+    private final int maxMeta;
+    private final String propName;
 
     public UnlistedPropertyInteger(int maxMeta, String propName) {
         this.maxMeta = maxMeta;

@@ -37,7 +37,7 @@ public class Teleports {
 
                         player.setPositionAndUpdate(getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5);
                         player.worldObj.updateEntityWithOptionalForce(player, false);
-                        player.playerNetServerHandler.sendPacket(new SPacketUpdateHealth(player.getHealth(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()));
+                        player.connection.sendPacket(new SPacketUpdateHealth(player.getHealth(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()));
                         player.timeUntilPortal = 150;
 
                         player.worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
@@ -91,7 +91,7 @@ public class Teleports {
                             player.changeDimension(newWorldID);
                             player.setPositionAndUpdate(getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5);
                             player.worldObj.updateEntityWithOptionalForce(player, false);
-                            player.playerNetServerHandler.sendPacket(new SPacketUpdateHealth(player.getHealth(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()));
+                            player.connection.sendPacket(new SPacketUpdateHealth(player.getHealth(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()));
                         }
                         getEntity().worldObj.playSound(getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
 

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class BlockHelper {
 
-    public static Map<Class<? extends Block>, String> blockClassToName = new HashMap<Class<? extends Block>, String>();
+    public static final Map<Class<? extends Block>, String> blockClassToName = new HashMap<Class<? extends Block>, String>();
 
     @Nullable
     public static Block getBlock(String name) {

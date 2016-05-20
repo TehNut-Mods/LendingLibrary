@@ -1,3 +1,5 @@
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 package tehnut.lib.test;
 
 /**
@@ -6,3 +8,6 @@ package tehnut.lib.test;
  * <p>
  * It should cover the majority of LendingLibrary's features.
  **/
+
+import mcp.MethodsReturnNonnullByDefault;
+import javax.annotation.ParametersAreNonnullByDefault;

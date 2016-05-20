@@ -3,7 +3,8 @@ package tehnut.lib.block.property;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
 public class UnlistedPropertyBoolean implements IUnlistedProperty<Boolean> {
-    private String propName;
+
+    private final String propName;
 
     public UnlistedPropertyBoolean(String propName) {
         this.propName = propName;
