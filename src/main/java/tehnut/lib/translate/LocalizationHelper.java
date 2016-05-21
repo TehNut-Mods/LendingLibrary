@@ -39,6 +39,11 @@ public class LocalizationHelper {
         return new TextComponentString(I18n.format(key, (Object[]) format));
     }
 
+    @SideOnly(Side.CLIENT)
+    protected String getText(String key, String... format) {
+        return localize(key, format).getFormattedText();
+    }
+
     protected int getKeyId(String key) {
         if (!keys.contains(key))
             keys.add(key);
