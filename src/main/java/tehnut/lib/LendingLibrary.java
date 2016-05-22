@@ -18,6 +18,7 @@ import java.util.Set;
 public class LendingLibrary {
 
     private static final LogHelper logger = new LogHelper("LendingLibrary");
+    private static LogHelper modLogger;
     private static LendingLibrary instance;
     private static String MODID;
 
@@ -30,6 +31,7 @@ public class LendingLibrary {
     public LendingLibrary(String modid) {
         instance = this;
         MODID = modid;
+        modLogger = new LogHelper(modid);
     }
 
     public void registerObjects(FMLPreInitializationEvent event) {
@@ -75,5 +77,9 @@ public class LendingLibrary {
 
     public static LogHelper getLogger() {
         return logger;
+    }
+
+    public static LogHelper getModLogger() {
+        return modLogger;
     }
 }

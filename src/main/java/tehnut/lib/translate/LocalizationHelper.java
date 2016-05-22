@@ -7,6 +7,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tehnut.lib.LendingLibrary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +34,14 @@ public class LocalizationHelper {
     }
 
     @SideOnly(Side.CLIENT)
-    protected ITextComponent localize(String key, String... format) {
+    public ITextComponent localize(String key, String... format) {
         if (!keys.contains(key))
             keys.add(key);
         return new TextComponentString(I18n.format(key, (Object[]) format));
     }
 
     @SideOnly(Side.CLIENT)
-    protected String getText(String key, String... format) {
+    public String getText(String key, String... format) {
         return localize(key, format).getFormattedText();
     }
 
@@ -52,6 +53,7 @@ public class LocalizationHelper {
     }
 
     public void sendLocalization(EntityPlayerMP player, String key, String... format) {
+        LendingLibrary.getModLogger().debug("Sent key [{}] to client {} [{}].", key, player.getName(), player.getGameProfile().getId());
         networkWrapper.sendTo(new MessageLocalization(localizationHelpers.indexOf(this), key, format), player);
     }
 
