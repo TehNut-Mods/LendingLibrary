@@ -32,12 +32,12 @@ public class LogHelper {
 
     public void error(String error, Object... format) {
         if (enabled)
-            logger.info(error, format);
+            logger.error(error, format);
     }
 
     public void debug(String debug, Object... format) {
         if (enabled)
-            logger.info(debug, format);
+            logger.debug(debug, format);
     }
 
     public void severe(String severe, Object... format) {
