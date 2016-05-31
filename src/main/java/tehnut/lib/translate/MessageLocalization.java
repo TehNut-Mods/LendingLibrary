@@ -12,13 +12,13 @@ public class MessageLocalization implements IMessage {
 
     private int helperId;
     private String key;
-    private String[] format;
+    private Object[] format;
 
     public MessageLocalization() {
 
     }
 
-    public MessageLocalization(int helperId, String key, String... format) {
+    public MessageLocalization(int helperId, String key, Object... format) {
         this.helperId = helperId;
         this.key = key;
         this.format = format;
@@ -38,8 +38,8 @@ public class MessageLocalization implements IMessage {
         buf.writeInt(helperId);
         ByteBufUtils.writeUTF8String(buf, key);
         buf.writeInt(format.length);
-        for (String string : format)
-            ByteBufUtils.writeUTF8String(buf, string);
+        for (Object object : format)
+            ByteBufUtils.writeUTF8String(buf, object.toString());
     }
 
     public static class Handler implements IMessageHandler<MessageLocalization, IMessage> {

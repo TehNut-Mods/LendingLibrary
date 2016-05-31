@@ -34,14 +34,14 @@ public class LocalizationHelper {
     }
 
     @SideOnly(Side.CLIENT)
-    public ITextComponent localize(String key, String... format) {
+    public ITextComponent localize(String key, Object... format) {
         if (!keys.contains(key))
             keys.add(key);
         return new TextComponentString(I18n.format(key, (Object[]) format));
     }
 
     @SideOnly(Side.CLIENT)
-    public String getText(String key, String... format) {
+    public String getText(String key, Object... format) {
         return localize(key, format).getFormattedText();
     }
 
@@ -52,7 +52,7 @@ public class LocalizationHelper {
         return keys.indexOf(key);
     }
 
-    public void sendLocalization(EntityPlayerMP player, String key, String... format) {
+    public void sendLocalization(EntityPlayerMP player, String key, Object... format) {
         LendingLibrary.getModLogger().debug("Sent key [{}] to client {} [{}].", key, player.getName(), player.getGameProfile().getId());
         networkWrapper.sendTo(new MessageLocalization(localizationHelpers.indexOf(this), key, format), player);
     }
