@@ -34,6 +34,17 @@ public class JsonHelper {
                 .create();
     }
 
+    public static void setGson(SerializerBase... serializers) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.disableHtmlEscaping();
+        gsonBuilder.serializeNulls();
+        gsonBuilder.setPrettyPrinting();
+        for (SerializerBase serializer : serializers)
+            gsonBuilder.registerTypeAdapter(serializer.getType(), serializer);
+
+        gson = gsonBuilder.create();
+    }
+
     public static void setGson(Gson newGson) {
         gson = newGson;
     }

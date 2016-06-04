@@ -11,4 +11,6 @@ public abstract class SerializerBase<T> implements JsonSerializer<T>, JsonDeseri
 
     @Override
     public abstract JsonElement serialize(T src, Type typeOfSrc, JsonSerializationContext context);
+
+    public abstract Class<?> getType();
 }

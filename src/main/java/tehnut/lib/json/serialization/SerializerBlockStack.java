@@ -28,4 +28,9 @@ public class SerializerBlockStack extends SerializerBase<BlockStack> {
         jsonObject.addProperty(META, src.getMeta());
         return jsonObject;
     }
+
+    @Override
+    public Class<?> getType() {
+        return BlockStack.class;
+    }
 }

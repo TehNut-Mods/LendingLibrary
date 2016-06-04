@@ -65,4 +65,9 @@ public class SerializerItemStack extends SerializerBase<ItemStack> {
             jsonObject.addProperty(NBT, src.getTagCompound().toString());
         return jsonObject;
     }
+
+    @Override
+    public Class<?> getType() {
+        return ItemStack.class;
+    }
 }

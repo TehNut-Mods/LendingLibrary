@@ -41,6 +41,11 @@ public class SerializerBlockPos extends SerializerBase<BlockPos> {
         jsonObject.addProperty(offset ? X_OFF : X_COORD, src.getX());
         jsonObject.addProperty(offset ? Y_OFF : Y_COORD, src.getY());
         jsonObject.addProperty(offset ? Z_OFF : Z_COORD, src.getZ());
-        return null;
+        return jsonObject;
+    }
+
+    @Override
+    public Class<?> getType() {
+        return BlockPos.class;
     }
 }
