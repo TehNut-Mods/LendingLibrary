@@ -46,7 +46,7 @@ dependencies {
 }
 
 minecraft {
-    version = "${mc_version}-${forge_version}"
+    version = "1.11-13.19.0.2126-1.11.x"
     runDir = "run"
 
     clientRunArgs += "--username=${username}"

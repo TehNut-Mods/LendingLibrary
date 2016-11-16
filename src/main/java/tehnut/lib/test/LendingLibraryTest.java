@@ -3,6 +3,7 @@ package tehnut.lib.test;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -23,8 +24,8 @@ public class LendingLibraryTest {
 
     public static final CreativeTabs tabTest = new CreativeTabs("test") {
         @Override
-        public Item getTabIconItem() {
-            return Items.BED;
+        public ItemStack getTabIconItem() {
+            return new ItemStack(Items.BED);
         }
     };
 

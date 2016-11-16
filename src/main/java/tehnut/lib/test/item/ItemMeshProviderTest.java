@@ -33,9 +33,11 @@ public class ItemMeshProviderTest extends Item implements IMeshProvider {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         if (world.isRemote)
-            return super.onItemRightClick(stack, world, player, hand);
+            return super.onItemRightClick(world, player, hand);
+
+        ItemStack stack = player.getHeldItem(hand);
 
         if (player.isSneaking()) {
             LendingLibraryTest.instance.getLocalizationHelper().sendLocalization((EntityPlayerMP) player, "test.key.ignore");

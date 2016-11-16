@@ -59,7 +59,7 @@ public class SerializerItemStack extends SerializerBase<ItemStack> {
     public JsonElement serialize(ItemStack src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty(NAME, src.getItem().getRegistryName().toString());
-        jsonObject.addProperty(AMOUNT, src.stackSize);
+        jsonObject.addProperty(AMOUNT, src.func_190916_E());
         jsonObject.addProperty(META, src.getItemDamage());
         if (nbt && src.getTagCompound() != null)
             jsonObject.addProperty(NBT, src.getTagCompound().toString());

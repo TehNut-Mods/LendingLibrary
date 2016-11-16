@@ -85,6 +85,6 @@ public class ItemStackWrapper {
     }
 
     public static ItemStackWrapper getWrapper(ItemStack stack) {
-        return new ItemStackWrapper(stack.getItem(), stack.stackSize, stack.getItemDamage());
+        return new ItemStackWrapper(stack.getItem(), stack.func_190916_E(), stack.getItemDamage());
     }
 }
