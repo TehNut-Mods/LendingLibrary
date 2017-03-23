@@ -46,7 +46,7 @@ dependencies {
 }
 
 minecraft {
-    version = "1.11-13.19.0.2126-1.11.x"
+    version = "${mc_version}-${forge_version}"
     runDir = "run"
 
     clientRunArgs += "--username=${username}"
@@ -81,10 +81,24 @@ if (JavaVersion.current().isJava8Compatible()) {
     }
 }
 
+// Ships all classes
 jar {
     classifier = ''
-    exclude 'tehnut/lib/test/**/*'
-    exclude 'assets/**/*'
+    from sourceSets.main.output
+    manifest.mainAttributes(
+            "Built-By": System.getProperty('user.name'),
+            "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
+            "Implementation-Title": project.name,
+            "Implementation-Version": project.version,
+            "Git-Hash": gitHash,
+            "Built-On": "${mc_version}-${forge_version}"
+    )
+}
+
+// Forge jar
+task forgeJar(type: Jar) {
+    classifier = 'forge'
+    exclude 'tehnut/lib/mc'
     from sourceSets.main.output
     manifest.mainAttributes(
             "Built-By": System.getProperty('user.name'),
@@ -99,21 +113,17 @@ jar {
 // Source jar
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    exclude 'tehnut/lib/test/**/*'
-    exclude 'assets/**/*'
     classifier = 'sources'
 }
 
 // Javadoc jar
 task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
-    exclude 'tehnut/lib/test/**/*'
-    exclude 'assets/**/*'
     from sourceSets.main.output
     classifier = 'javadoc'
 }
 
-tasks.build.dependsOn javadoc, javadocJar, sourcesJar
+tasks.build.dependsOn forgeJar, javadoc, javadocJar, sourcesJar
 
 tasks.withType(JavaCompile) { task ->
     task.options.encoding = 'UTF-8'
