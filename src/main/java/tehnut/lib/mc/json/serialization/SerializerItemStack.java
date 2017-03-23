@@ -33,7 +33,7 @@ public class SerializerItemStack extends SerializerBase<ItemStack> {
     @Override
     public ItemStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         ResourceLocation name = new ResourceLocation(JsonHelper.getString(json, NAME, "minecraft:air"));
-        int amount = MathHelper.clamp_int(JsonHelper.getInteger(json, AMOUNT, 1), 1, 64);
+        int amount = MathHelper.clamp(JsonHelper.getInteger(json, AMOUNT, 1), 1, 64);
         int meta = JsonHelper.getInteger(json, META, 0);
         NBTTagCompound tagCompound = null;
         try {
@@ -46,7 +46,7 @@ public class SerializerItemStack extends SerializerBase<ItemStack> {
                 tagCompound = JsonToNBT.getTagFromJson(nbtJson);
             }
         } catch (NBTException e) {
-            LendingLibrary.getLogger().error("Error handling NBT string for {}. Is it formatted correctly?", name);
+            LendingLibrary.LOGGER.error("Error handling NBT string for {}. Is it formatted correctly?", name);
         }
 
         ItemStack ret = new ItemStack(ForgeRegistries.ITEMS.getValue(name), amount, meta);
@@ -59,7 +59,7 @@ public class SerializerItemStack extends SerializerBase<ItemStack> {
     public JsonElement serialize(ItemStack src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty(NAME, src.getItem().getRegistryName().toString());
-        jsonObject.addProperty(AMOUNT, src.func_190916_E());
+        jsonObject.addProperty(AMOUNT, src.getCount());
         jsonObject.addProperty(META, src.getItemDamage());
         if (nbt && src.getTagCompound() != null)
             jsonObject.addProperty(NBT, src.getTagCompound().toString());
