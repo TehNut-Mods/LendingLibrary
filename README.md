@@ -2,11 +2,16 @@
 
 A shadeable lib used in many of my projects.
 
-Currently available for:
-
-* Minecraft 1.9
-
 ## How to add to your project
+
+### There are two modules for this library
+
+1. Standard
+    * Includes all packages and classes.
+    * Should be updated each Minecraft version
+2. Forge (append artifact with `:forge`)
+    * Excludes the `tehnut.lib.mc` package.
+    * Only touches Forge classes at the most, so it should be relatively stable across Minecraft versions
 
 It's a fairly simple process. Just add the following bits of code to your `build.gradle`.
 
@@ -36,40 +41,3 @@ It's a fairly simple process. Just add the following bits of code to your `build
                 exclude 'META-INF', 'META-INF/**'
             }
         }
-                          
-### Working Examples
-
-* [Soul Shards - The Old Ways](https://github.com/TehNut/Soul-Shards-The-Old-Ways/blob/1.9/build.gradle)
-* [ResourcefulCrops](https://github.com/TehNut/ResourcefulCrops/blob/1.9/build.gradle)
-
-## Basic Usage
-
-This is a fairly simple library to use. Here is a basic skeleton:
-
-```java
-@Mod(modid = MyMod.MODID, name = MyMod.MODID, version = "1.0.0")
-public class MyMod {
-    public static final String MODID = "mymod";
-    
-    public LendingLibrary library;
-    
-    public MyMod() {
-        library = new LendingLibrary(MODID);
-    }
-    
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        // Registers all Items/Blocks/EventHandlers with the appropriate annotation
-        library.registerObjects(event);
-    }
-}
-```
-
-## Example Usage
-
-A few of my mods use this lib. I'm not aware of any others.
-
-* [ResourcefulCrops](https://github.com/TehNut/ResourcefulCrops/tree/1.9)
-* [Soul Shards - The Old Ways](https://github.com/TehNut/Soul-Shards-The-Old-Ways/tree/1.9)
-
-LendingLibrary also includes [a test mod](https://github.com/TehNut/LendingLibrary/tree/1.9/src/main/java/tehnut/lib/test) in it's repository that covers the most basic uses. This is stripped from the `jar` when built.
