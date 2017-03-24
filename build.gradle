@@ -34,9 +34,6 @@ version = "${mc_version}-${mod_version}-${build_number}"
 if (project.hasProperty('gitpush'))
     version += "-ss"
 
-import net.franz_becker.gradle.lombok.task.DelombokTask
-import org.ajoberstar.grgit.*
-
 def gitHash = 'unknown'
 
 repositories {

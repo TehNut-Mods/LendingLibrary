@@ -6,25 +6,27 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
 public class ModelHandler {
 
-    @SidedProxy
-    public static IProxy HANDLER;
-
+    @SuppressWarnings({"MethodCallSideOnly"})
     // Helper method for registering items/blocks and handling their
     public static <T extends IForgeRegistryEntry<T>> T register(T type) {
         if (type instanceof Item) {
             GameRegistry.register(type);
-            HANDLER.handleItemModel((Item) type);
+            if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+                Client.handleItemModel((Item) type);
         } else if (type instanceof Block) {
             GameRegistry.register(type);
-            HANDLER.handleBlockModel((Block) type);
+            if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+                Client.handleBlockModel((Block) type);
         } else {
             GameRegistry.register(type);
         }
@@ -32,10 +34,11 @@ public class ModelHandler {
         return type;
     }
 
-    @SuppressWarnings({"MethodCallSideOnly", "ConstantConditions"})
-    public static class ClientProxy implements IProxy {
-        @Override
-        public void handleBlockModel(Block block) {
+    @SuppressWarnings({"ConstantConditions"})
+    @SideOnly(Side.CLIENT)
+    public static class Client {
+
+        public static void handleBlockModel(Block block) {
             Item itemBlock = Item.getItemFromBlock(block);
 
             if (!(block instanceof IModeled)) {
@@ -60,8 +63,7 @@ public class ModelHandler {
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, new ModelResourceLocation(block.getRegistryName(), variants.get(i)));
         }
 
-        @Override
-        public void handleItemModel(Item item) {
+        public static void handleItemModel(Item item) {
             if (!(item instanceof IModeled))
                 return;
 
@@ -80,23 +82,5 @@ public class ModelHandler {
             for (int i = 0; i < variants.size(); i++)
                 ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(stateLoc, variants.get(i)));
         }
-    }
-
-    public static class ServerProxy implements IProxy {
-        @Override
-        public void handleBlockModel(Block block) {
-            // No-op
-        }
-
-        @Override
-        public void handleItemModel(Item item) {
-            // No-op
-        }
-    }
-
-    public interface IProxy {
-        void handleBlockModel(Block block);
-
-        void handleItemModel(Item item);
     }
 }

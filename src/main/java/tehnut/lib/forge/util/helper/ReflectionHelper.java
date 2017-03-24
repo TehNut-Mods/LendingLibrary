@@ -1,5 +1,7 @@
 package tehnut.lib.forge.util.helper;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
@@ -10,7 +12,6 @@ import tehnut.lib.forge.feature.IFeature;
 import javax.annotation.Nonnull;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,15 +28,29 @@ public class ReflectionHelper {
     }
 
     /**
+     * Populates a list with <b>all</b> fields (including inherited fields) of the given class that fit the filter.
+     *
+     * @param fields - List of fields to populate
+     * @param type - The class to get the fields of
+     * @param fieldFilter - Definition of fields that should be collected
+     */
+    public static void getAllFields(List<Field> fields, Class<?> type, Predicate<Field> fieldFilter) {
+        for (Field field : type.getDeclaredFields())
+            if (fieldFilter.apply(field))
+                fields.add(field);
+
+        if (type.getSuperclass() != null)
+            getAllFields(fields, type.getSuperclass(), fieldFilter);
+    }
+
+    /**
      * Populates a list with <b>all</b> fields (including inherited fields) of the given class.
      *
      * @param fields - List of fields to populate
      * @param type - The class to get the fields of
      */
     public static void getAllFields(List<Field> fields, Class<?> type) {
-        fields.addAll(Arrays.asList(type.getDeclaredFields()));
-        if (type.getSuperclass() != null)
-            getAllFields(fields, type.getSuperclass());
+        getAllFields(fields, type, Predicates.<Field>alwaysTrue());
     }
 
     /**

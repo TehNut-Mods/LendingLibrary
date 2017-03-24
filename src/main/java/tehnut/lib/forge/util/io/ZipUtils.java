@@ -18,7 +18,6 @@ public class ZipUtils {
      */
     @Nonnull
     public static File extractZip(File zip, File extractTo) {
-//        String extractedPath = zip.getParent() + "/" + FilenameUtils.getBaseName(zip.getName());
         extractTo.mkdir();
 
         ZipFile zipFile = null;
