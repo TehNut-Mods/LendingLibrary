@@ -9,7 +9,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tehnut.lib.LendingLibrary;
-import tehnut.lib.mc.json.JsonHelper;
+import tehnut.lib.forge.json.JsonHelper;
+import tehnut.lib.forge.json.serialization.SerializerBase;
 
 import java.lang.reflect.Type;
 

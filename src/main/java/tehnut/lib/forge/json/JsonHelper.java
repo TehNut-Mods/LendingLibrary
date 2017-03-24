@@ -1,14 +1,13 @@
-package tehnut.lib.mc.json;
+package tehnut.lib.forge.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import tehnut.lib.LendingLibrary;
-import tehnut.lib.mc.json.serialization.*;
+import tehnut.lib.forge.json.serialization.SerializerBase;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.io.*;
@@ -19,17 +18,7 @@ public class JsonHelper {
     public static Gson gson;
 
     static {
-        setGson(false, false);
-    }
-
-    public static void setGson(boolean offset, boolean nbt) {
-        gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .serializeNulls()
-                .disableHtmlEscaping()
-                .registerTypeAdapter(BlockPos.class, new SerializerBlockPos(offset))
-                .registerTypeAdapter(ItemStack.class, new SerializerItemStack(nbt))
-                .create();
+        setGson();
     }
 
     public static void setGson(SerializerBase... serializers) {
@@ -171,10 +160,12 @@ public class JsonHelper {
         return jsonElement.getAsJsonObject().get(memberName).getAsFloat();
     }
 
+    @Nonnull
     public static Color getColor(JsonElement jsonElement, String memberName, Color def) {
         return getColor(jsonElement, memberName, "#" + def.getRGB());
     }
 
+    @Nonnull
     public static Color getColor(JsonElement jsonElement, String memberName, String def) {
         if (!def.startsWith("#"))
             def = "#" + def;

@@ -104,6 +104,7 @@ public class ReflectionHelper {
          * @param annotationData - A map of field name -> field value from the annotation
          * @return a new instance of the class type.
          */
+        @Nonnull
         T createInstance(Class<?> type, Map<String, Object> annotationData) throws Exception;
     }
 }

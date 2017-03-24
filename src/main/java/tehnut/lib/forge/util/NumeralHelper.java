@@ -1,32 +1,34 @@
 package tehnut.lib.forge.util;
 
+import javax.annotation.Nonnull;
 import java.util.TreeMap;
 
 public class NumeralHelper {
 
-    private static final TreeMap<Integer, String> romanNumerals = new TreeMap<Integer, String>();
+    private static final TreeMap<Integer, String> ROMAN_NUMERALS = new TreeMap<Integer, String>();
 
     static {
-        romanNumerals.put(1000, "M");
-        romanNumerals.put(900, "CM");
-        romanNumerals.put(500, "D");
-        romanNumerals.put(400, "CD");
-        romanNumerals.put(100, "C");
-        romanNumerals.put(90, "XC");
-        romanNumerals.put(50, "L");
-        romanNumerals.put(40, "XL");
-        romanNumerals.put(10, "X");
-        romanNumerals.put(9, "IX");
-        romanNumerals.put(5, "V");
-        romanNumerals.put(4, "IV");
-        romanNumerals.put(1, "I");
+        ROMAN_NUMERALS.put(1000, "M");
+        ROMAN_NUMERALS.put(900, "CM");
+        ROMAN_NUMERALS.put(500, "D");
+        ROMAN_NUMERALS.put(400, "CD");
+        ROMAN_NUMERALS.put(100, "C");
+        ROMAN_NUMERALS.put(90, "XC");
+        ROMAN_NUMERALS.put(50, "L");
+        ROMAN_NUMERALS.put(40, "XL");
+        ROMAN_NUMERALS.put(10, "X");
+        ROMAN_NUMERALS.put(9, "IX");
+        ROMAN_NUMERALS.put(5, "V");
+        ROMAN_NUMERALS.put(4, "IV");
+        ROMAN_NUMERALS.put(1, "I");
     }
 
+    @Nonnull
     public static String toRoman(int arabic) {
-        int convert = romanNumerals.floorKey(arabic);
+        int convert = ROMAN_NUMERALS.floorKey(arabic);
         if (arabic == convert)
-            return romanNumerals.get(convert);
+            return ROMAN_NUMERALS.get(convert);
 
-        return romanNumerals.get(convert) + toRoman(arabic - convert);
+        return ROMAN_NUMERALS.get(convert) + toRoman(arabic - convert);
     }
 }

@@ -1,4 +1,4 @@
-package tehnut.lib.mc.json.serialization;
+package tehnut.lib.forge.json.serialization;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;

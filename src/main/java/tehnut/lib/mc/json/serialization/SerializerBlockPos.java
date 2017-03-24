@@ -2,7 +2,8 @@ package tehnut.lib.mc.json.serialization;
 
 import com.google.gson.*;
 import net.minecraft.util.math.BlockPos;
-import tehnut.lib.mc.json.JsonHelper;
+import tehnut.lib.forge.json.JsonHelper;
+import tehnut.lib.forge.json.serialization.SerializerBase;
 
 import java.lang.reflect.Type;
 
