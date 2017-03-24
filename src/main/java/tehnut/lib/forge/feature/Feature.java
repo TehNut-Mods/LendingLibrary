@@ -1,7 +1,7 @@
 package tehnut.lib.forge.feature;
 
 import net.minecraftforge.fml.common.Loader;
-import tehnut.lib.forge.util.ReflectionHelper;
+import tehnut.lib.forge.util.helper.ReflectionHelper;
 
 import javax.annotation.Nonnull;
 import java.lang.annotation.ElementType;

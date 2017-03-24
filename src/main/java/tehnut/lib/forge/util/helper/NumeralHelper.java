@@ -1,4 +1,4 @@
-package tehnut.lib.forge.util;
+package tehnut.lib.forge.util.helper;
 
 import javax.annotation.Nonnull;
 import java.util.TreeMap;

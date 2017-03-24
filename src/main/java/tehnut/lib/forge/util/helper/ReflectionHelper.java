@@ -1,4 +1,4 @@
-package tehnut.lib.forge.util;
+package tehnut.lib.forge.util.helper;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
