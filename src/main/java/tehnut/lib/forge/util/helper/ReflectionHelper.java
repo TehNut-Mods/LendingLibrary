@@ -54,6 +54,21 @@ public class ReflectionHelper {
     }
 
     /**
+     * Sets all passed fields as accessible.
+     *
+     * @param fields - A list of fields to allow access to
+     */
+    public static void permitFields(List<Field> fields) {
+        try {
+            for (Field field : fields)
+                if (!field.isAccessible())
+                    field.setAccessible(true);
+        } catch (SecurityException e) {
+            // No-op
+        }
+    }
+
+    /**
      * Gathers instances of classes that are annotated with the given annotation.
      *
      * If your annotation contains data that could/should potentially stop the class from loading, register a new
