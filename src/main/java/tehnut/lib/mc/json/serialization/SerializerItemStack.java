@@ -53,7 +53,7 @@ public class SerializerItemStack extends SerializerBase<ItemStack> {
         ItemStack ret = new ItemStack(ForgeRegistries.ITEMS.getValue(name), amount, meta);
         if (nbt && tagCompound != null)
             ret.setTagCompound(tagCompound);
-        return ret;
+        return ret.isEmpty() ? ItemStack.EMPTY : ret;
     }
 
     @Override
