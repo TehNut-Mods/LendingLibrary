@@ -1,11 +1,13 @@
 package tehnut.lib.forge.util.helper;
 
+import com.google.common.collect.Maps;
+
 import javax.annotation.Nonnull;
 import java.util.TreeMap;
 
 public class NumeralHelper {
 
-    private static final TreeMap<Integer, String> ROMAN_NUMERALS = new TreeMap<Integer, String>();
+    private static final TreeMap<Integer, String> ROMAN_NUMERALS = Maps.newTreeMap();
 
     static {
         ROMAN_NUMERALS.put(1000, "M");
