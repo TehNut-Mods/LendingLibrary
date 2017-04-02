@@ -22,6 +22,12 @@ public class FeatureHandler {
 
     private final Configuration configuration;
 
+    /**
+     * Creates a new FeatureHandler. All feature related config values are placed into the {@code feature} category of
+     * the given Configuration object.
+     *
+     * @param configuration - The configuration object to read and write feature values from
+     */
     public FeatureHandler(Configuration configuration) {
         this.configuration = configuration;
     }
