@@ -7,12 +7,10 @@ import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -25,7 +23,6 @@ public class OreDictPrioritized {
     private static final Cache<String, ItemStack> LOOKUP_CACHE = CacheBuilder.newBuilder().build();
 
     public static void loadPriorities(File priorityFile) {
-        OreDictionary.registerOre("ingotGold", Items.POTATO);
         Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
         if (!priorityFile.exists()) {
             try {
@@ -56,10 +53,10 @@ public class OreDictPrioritized {
         }
     }
 
-    @Nullable
+    @Nonnull
     public static ItemStack get(String entry) {
         if (!OreDictionary.doesOreNameExist(entry))
-            return null;
+            return ItemStack.EMPTY;
 
         List<ItemStack> stacks = OreDictionary.getOres(entry);
 
