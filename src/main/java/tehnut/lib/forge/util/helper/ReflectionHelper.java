@@ -12,6 +12,7 @@ import tehnut.lib.forge.feature.IFeature;
 import javax.annotation.Nonnull;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,7 +35,7 @@ public class ReflectionHelper {
      * @param type - The class to get the fields of
      * @param fieldFilter - Definition of fields that should be collected
      */
-    public static void getAllFields(List<Field> fields, Class<?> type, Predicate<Field> fieldFilter) {
+    public static void getAllFields(Collection<Field> fields, Class<?> type, Predicate<Field> fieldFilter) {
         for (Field field : type.getDeclaredFields())
             if (fieldFilter.apply(field))
                 fields.add(field);
@@ -49,7 +50,7 @@ public class ReflectionHelper {
      * @param fields - List of fields to populate
      * @param type - The class to get the fields of
      */
-    public static void getAllFields(List<Field> fields, Class<?> type) {
+    public static void getAllFields(Collection<Field> fields, Class<?> type) {
         getAllFields(fields, type, Predicates.<Field>alwaysTrue());
     }
 
@@ -58,7 +59,7 @@ public class ReflectionHelper {
      *
      * @param fields - A list of fields to allow access to
      */
-    public static void permitFields(List<Field> fields) {
+    public static void permitFields(Collection<Field> fields) {
         try {
             for (Field field : fields)
                 if (!field.isAccessible())
