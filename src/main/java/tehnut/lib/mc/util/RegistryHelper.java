@@ -64,7 +64,7 @@ public class RegistryHelper {
         return (FMLControlledNamespacedRegistry<T>) registryBuilder.create();
     }
 
-    public static <T extends IForgeRegistryEntry<T>> T register(T type, String name) {
+    public static <T extends IForgeRegistryEntry> T register(T type, String name) {
         boolean reg = false;
         for (Map.Entry<Class<? extends IForgeRegistryEntry>, Function<Pair<IForgeRegistryEntry, String>, Void>> entry : REGISTRY_CASES.entrySet()) {
             if (entry.getKey().isAssignableFrom(type.getClass())) {
@@ -75,7 +75,7 @@ public class RegistryHelper {
         }
 
         if (!reg)
-            GameRegistry.register(type.setRegistryName(new ResourceLocation(Loader.instance().activeModContainer().getModId(), name)));
+            GameRegistry.register((IForgeRegistryEntry) type.setRegistryName(new ResourceLocation(Loader.instance().activeModContainer().getModId(), name)));
 
         return type;
     }

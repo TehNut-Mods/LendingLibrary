@@ -18,7 +18,7 @@ public class ModelHandler {
 
     @SuppressWarnings({"MethodCallSideOnly"})
     // Helper method for registering items/blocks and handling their
-    public static <T extends IForgeRegistryEntry<T>> T register(T type) {
+    public static <T extends IForgeRegistryEntry> T register(T type) {
         if (type instanceof Item) {
             GameRegistry.register(type);
             if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
