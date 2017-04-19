@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockEnum<E extends Enum<E> & IStringSerializable> extends Block {
 
     private final E[] types;
+    private final Predicate<E> valueFilter;
     private final PropertyEnum<E> property;
     private final BlockStateContainer realStateContainer;
 
@@ -25,6 +26,7 @@ public class BlockEnum<E extends Enum<E> & IStringSerializable> extends Block {
         super(material);
 
         this.types = enumClass.getEnumConstants();
+        this.valueFilter = valueFilter;
         this.property = PropertyEnum.create(propName, enumClass, valueFilter);
         this.realStateContainer = createStateContainer();
         setDefaultState(getBlockState().getBaseState());
@@ -67,7 +69,8 @@ public class BlockEnum<E extends Enum<E> & IStringSerializable> extends Block {
     @Override
     public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> subBlocks) {
         for (E type : types)
-            subBlocks.add(new ItemStack(item, 1, type.ordinal()));
+            if (valueFilter.apply(type))
+                subBlocks.add(new ItemStack(item, 1, type.ordinal()));
     }
 
     protected BlockStateContainer createStateContainer() {
