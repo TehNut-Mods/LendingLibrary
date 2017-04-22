@@ -88,4 +88,8 @@ public class BlockEnum<E extends Enum<E> & IStringSerializable> extends Block {
     public BlockStateContainer getRealStateContainer() {
         return realStateContainer;
     }
+
+    public boolean hasCustomItem() {
+        return false;
+    }
 }

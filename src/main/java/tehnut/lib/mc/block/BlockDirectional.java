@@ -35,12 +35,18 @@ public class BlockDirectional extends BlockEnum<EnumFacing> {
     @Override
     public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> subBlocks) {
         // To stop each facing having an itemblock
+        subBlocks.add(new ItemStack(item));
     }
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         EnumFacing playerFacing = placementStyle.transform(placer, EnumFacing.getDirectionFromEntityLiving(pos, placer));
         return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(getProperty(), playerFacing);
+    }
+
+    @Override
+    public boolean hasCustomItem() {
+        return true;
     }
 
     public enum PlacementStyle {

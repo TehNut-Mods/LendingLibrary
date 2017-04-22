@@ -35,7 +35,7 @@ public class RegistryHelper {
 
                 Block block = (Block) input.getLeft();
                 GameRegistry.register(block.setRegistryName(input.getRight()));
-                if (block instanceof BlockEnum)
+                if (block instanceof BlockEnum && !((BlockEnum) block).hasCustomItem())
                     GameRegistry.register(new ItemBlockEnum((BlockEnum) block).setRegistryName(input.getRight()));
                 if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
                     ModelHandler.Client.handleBlockModel(block);
