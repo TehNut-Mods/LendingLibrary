@@ -148,6 +148,9 @@ public class TileSyncBase extends TileEntity {
         if (TYPE_MAPPING.containsKey(type))
             type = TYPE_MAPPING.get(type);
 
+        if (type.isEnum())
+            return ADAPTERS.get(Enum.class);
+
         return ADAPTERS.get(type);
     }
 

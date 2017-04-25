@@ -9,9 +9,7 @@ public class NBTAdapterEnum implements INBTTypeAdapter<Enum> {
     @Override
     public void write(NBTTagCompound compound, Enum value, String fieldName) {
         NBTTagCompound enumTag = new NBTTagCompound();
-        enumTag.setString("className", value
-                .getClass()
-                .getName());
+        enumTag.setString("className", value.getClass().getName());
         enumTag.setString("value", value.name());
 
         compound.setTag(fieldName, enumTag);
