@@ -21,18 +21,21 @@ import java.util.List;
 public class FeatureHandler {
 
     private final Configuration configuration;
+    private final List<Pair<IFeature, Feature>> features;
 
     /**
      * Creates a new FeatureHandler. All feature related config values are placed into the {@code feature} category of
      * the given Configuration object.
      *
      * @param configuration - The configuration object to read and write feature values from
+     * @param features - A list of the features to be loaded
      */
-    public FeatureHandler(Configuration configuration) {
+    public FeatureHandler(Configuration configuration, List<Pair<IFeature, Feature>> features) {
         this.configuration = configuration;
+        this.features = features;
     }
 
-    public void preInit(List<Pair<IFeature, Feature>> features, FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event) {
         Iterator<Pair<IFeature, Feature>> iterator = features.iterator();
         while (iterator.hasNext()) {
             Pair<IFeature, Feature> feature = iterator.next();
@@ -71,12 +74,12 @@ public class FeatureHandler {
         }
     }
 
-    public void init(List<Pair<IFeature, Feature>> features, FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) {
         for (Pair<IFeature, Feature> feature : features)
             feature.getLeft().init(event);
     }
 
-    public void postInit(List<Pair<IFeature, Feature>> features, FMLPostInitializationEvent event) {
+    public void postInit(FMLPostInitializationEvent event) {
         for (Pair<IFeature, Feature> feature : features)
             feature.getLeft().postInit(event);
     }
